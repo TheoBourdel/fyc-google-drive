@@ -17,11 +17,11 @@ app.use(cors(
         methods: 'POST,GET,PUT,OPTIONS,DELETE'
     }
 )); 
-app.use(router);
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(router);
 
 app.listen(port, () => {
     console.log('Server app listening on port ' + port);

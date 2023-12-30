@@ -1,0 +1,17 @@
+<p-menubar>
+    <ng-template pTemplate="start">
+        <p>FYC - Cas pratique</p>
+    </ng-template>
+    <div class="button-container">
+        <p-button [outlined]="true" label="Créer un dossier" (click)="showDialog()"></p-button>
+        <p-fileUpload mode="basic" chooseLabel="Importer un fichier" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" (onUpload)="onUpload($event)"></p-fileUpload>
+    </div>
+</p-menubar>
+
+<p-dialog header="Créer un dossier" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+    <form [formGroup]="folderForm" (ngSubmit)="onSubmit()">
+        <input placeholder="Nom du dossier*" type="text" pInputText formControlName="name"/>
+        <textarea placeholder="Descripition" rows="5" cols="30" [autoResize]="true" pInputTextarea formControlName="description"></textarea>
+        <p-button label="Créer" (click)="onSubmit()"></p-button>
+    </form>
+</p-dialog>

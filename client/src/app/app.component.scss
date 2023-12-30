@@ -1,0 +1,33 @@
+.folder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 300px;
+    border-radius: 5px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+
+    & .left-content, .right-content {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+    }
+}
+.folder:hover {
+    background-color: #eee;
+}
+
+.folder-list {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

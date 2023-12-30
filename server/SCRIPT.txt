@@ -1,0 +1,17 @@
+CREATE TABLE folder (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    parent_id INTEGER REFERENCES folder(id) ON DELETE CASCADE
+);
+
+CREATE TABLE document (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    content TEXT,
+    upload_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    folder_id INT REFERENCES folder(id) ON DELETE CASCADE,
+    file_path VARCHAR(255)
+);

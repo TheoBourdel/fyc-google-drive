@@ -1,7 +1,7 @@
-import DataTypes from 'sequelize';
-import sequelize from '../db/conn.js';
+const DataTypes = require('sequelize');
+const sequelize = require('../db/conn.js');
 
-const Recipe = sequelize.define('recipe', {
+const Folder = sequelize.define('folder', {
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -9,57 +9,35 @@ const Recipe = sequelize.define('recipe', {
         autoIncrement: true
     },
     name: {
-        type: DataTypes.STRING(255),
-        allowNull: false
+        allowNull: false,
+        type: DataTypes.STRING
     },
     description: {
-        type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: true,
+        type: DataTypes.TEXT
     },
-    ingredients: {
-        type: DataTypes.JSON,
-        allowNull: false
-    },
-    instructions: {
-        type: DataTypes.JSON,
-        allowNull: false
-    },
-    temps_preparation: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    temps_cuisson: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    difficulte: {
-        type: DataTypes.STRING(50),
-        allowNull: false
-    },
-    type: {
-        type: DataTypes.STRING(50),
-        allowNull: false
-    },
-    image_url: {
-        type: DataTypes.STRING(255),
-        allowNull: false
-    },
-    date_creation: {
+    created_at: {
+        allowNull: false,
         type: DataTypes.DATE,
-        allowNull: false
+        defaultValue: DataTypes.NOW
     },
-    regime_special: {
-        type: DataTypes.JSON,
-        allowNull: false
+    updated_at: {
+        allowNull: false,
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
     },
-    restrictions_sante: {
-        type: DataTypes.JSON,
-        allowNull: false
+    parent_id: {
+        allowNull: true,
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'folder',
+            key: 'id'
+        },
+        onDelete: 'CASCADE'
     }
 }, {
-    tableName: 'recipes',
-    timestamps: false,
-    subQuery: false
+    tableName: 'folder',
+    timestamps: false
 });
 
-export default Recipe;
+module.exports = Folder;
