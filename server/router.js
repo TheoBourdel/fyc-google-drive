@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const path = require('path');
 const folderController = require("./controller/folderController");
 const documentController = require("./controller/documentController");
+
+router.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 router.get("/", (req, res) => {
     res.json("Hello world!!");

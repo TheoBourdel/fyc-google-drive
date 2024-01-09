@@ -64,6 +64,12 @@ export class AppComponent {
     })
   }
 
+  openDocument(document: Document): void {
+    console.log(window.location.pathname);
+    const filePath = `http://localhost:8000/uploads/${document.title}`;
+    window.open(filePath, '_blank');
+  }
+
   deleteDocument(id: number): void {
     this.documentService.deleteDocument(id).subscribe({
       next: () => {
