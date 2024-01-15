@@ -15,3 +15,34 @@
         <p-button label="Créer" (click)="onSubmit()"></p-button>
     </form>
 </p-dialog>
+
+<div *ngIf="modalVisible" class="modal-element">
+    <div class="modal">
+      <div class="modal-content">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <h2 id="h2_progress">{{ modalTitle }}</h2>
+        <p>{{ modalMessage }}</p>
+        <div class="progress-content">
+          <br><br><br><br>
+          <div class="progressDiv">
+            <div id="progress"></div>
+          </div>
+          <br><br>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="modalVisibleError" class="modal-element">
+    <div class="modal">
+      <div class="modal-content">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <h2 id="h2_progress_error">{{ modalTitleError }}</h2>
+        <p>{{ modalMessageError }}</p>
+          <br><br><br><br>
+          <br><br>
+      </div>
+    </div>
+  </div>
+  
+  
