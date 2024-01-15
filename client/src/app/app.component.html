@@ -21,10 +21,10 @@
 
   <h3>Documents</h3>
   <div *ngIf="documents.length > 0; else noDocuments" class="folder-list">
-    <div *ngFor="let document of documents" class="folder" (click)="openDocument(document)">
+    <div *ngFor="let document of documents" class="folder">
       <div class="left-content">
         <i class="pi pi-file"></i>
-        <span>{{document.title}}</span>
+        <span (click)="openDocument(document)">{{document.title}}</span>
       </div>
       <div class="right-content">
         <i class="pi pi-trash" (click)="deleteDocument(document.id)"></i>
