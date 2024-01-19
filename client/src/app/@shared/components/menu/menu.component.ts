@@ -20,7 +20,7 @@ export class MenuComponent {
   modalVisibleError: boolean = false;
   modalTitleError: string = 'Info'
   modalMessageError: string = '';
-  
+
   constructor(
     private fb: FormBuilder,
     private folderService: FolderService,
@@ -49,7 +49,7 @@ export class MenuComponent {
   }
 
   onUpload(event: any) {
-    const file = event.files[1];
+    const file = event.files[0];
     this.documentService.createDocument(file).pipe(
       tap(
         () => this.openModal('Document creation in progress...'),
@@ -79,9 +79,9 @@ export class MenuComponent {
     console.log(progress);
     const h2 = document.getElementById('h2_progress') as HTMLHeadingElement;
     console.log(h2);
-  
+
     let i = 0;
-  
+
     function animateProgress() {
       if (i < 100) {
         i++;
@@ -90,7 +90,7 @@ export class MenuComponent {
         requestAnimationFrame(animateProgress);
       }
     }
-  
+
     animateProgress();
   }
 
