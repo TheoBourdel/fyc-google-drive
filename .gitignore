@@ -1,4 +1,5 @@
 # .gitignore
+.idea/
 
 # Ignorer le répertoire node_modules à la racine du projet
 node_modules/

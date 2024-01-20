@@ -8,7 +8,7 @@
     </div>
 </p-menubar>
 
-<p-dialog header="Créer un dossier" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+<p-dialog header="Créer un dossier" [visible]="(modalVisibility$ | async) ?? false" (visibleChange)="modalVisibility$.next($event)" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
     <form [formGroup]="folderForm" (ngSubmit)="onSubmit()">
         <input placeholder="Nom du dossier*" type="text" pInputText formControlName="name"/>
         <textarea placeholder="Descripition" rows="5" cols="30" [autoResize]="true" pInputTextarea formControlName="description"></textarea>
@@ -16,7 +16,7 @@
     </form>
 </p-dialog>
 
-<div *ngIf="modalVisible" class="modal-element">
+<div *ngIf="modalVisibility$ | async" class="modal-element">
     <div class="modal">
       <div class="modal-content">
         <span class="close" (click)="closeModal()">&times;</span>
@@ -33,7 +33,7 @@
     </div>
   </div>
 
-  <div *ngIf="modalVisibleError" class="modal-element">
+<div *ngIf="modalErrorVisibility$ | async" class="modal-element">
     <div class="modal">
       <div class="modal-content">
         <span class="close" (click)="closeModal()">&times;</span>
@@ -44,5 +44,4 @@
       </div>
     </div>
   </div>
-  
-  
+
