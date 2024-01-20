@@ -22,7 +22,8 @@ export class MenuComponent implements OnInit{
   modalVisibility$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   modalErrorVisibility$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   folderCreated$: Subject<Folder> = new Subject();
-  errorOccurred$: Subject<string> = new Subject();
+  folderErrorOccurred$: Subject<string> = new Subject();
+  uploadErrorOccurred$: Subject<string> = new Subject();
 
   constructor(
     private fb: FormBuilder,
@@ -57,6 +58,7 @@ export class MenuComponent implements OnInit{
       tap(() => this.openModal('Document creation in progress...')),
       catchError((error) => {
         this.openModalError('Document creation failed.');
+        this.folderErrorOccurred$.next('Error creating document');
         console.error('Error during document creation: ', error);
         return of(null);
       })
@@ -65,10 +67,12 @@ export class MenuComponent implements OnInit{
         if (document) {
           console.log('Document created successfully: ', document);
         } else {
+          this.uploadErrorOccurred$.next('Document creation failed.');
           console.log('Document creation failed.');
         }
       },
       error: (err) => {
+        this.uploadErrorOccurred$.next('Error uploading document');
         console.error(err);
       }
     });
@@ -131,7 +135,7 @@ export class MenuComponent implements OnInit{
         console.log(folder);
       },
       error: (err) => {
-        this.errorOccurred$.next('Error creating folder');
+        this.folderErrorOccurred$.next('Error creating folder');
         console.error(err);
       }
     });
