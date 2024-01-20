@@ -4,7 +4,7 @@ import { FolderService } from '../../../@core/services/folder.service';
 import { Folder } from '../../../@core/models/Folder';
 import { DocumentService } from '../../../@core/services/document.service';
 import { Document } from '../../../@core/models/Document';
-import { of, catchError, tap, BehaviorSubject, Subject} from 'rxjs';
+import {of, catchError, tap, BehaviorSubject, Subject, ReplaySubject, AsyncSubject} from 'rxjs';
 
 @Component({
   selector: 'app-menu',
@@ -21,9 +21,10 @@ export class MenuComponent implements OnInit{
   uploadProgress$: BehaviorSubject<number> = new BehaviorSubject(0);
   modalVisibility$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   modalErrorVisibility$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  folderCreated$: Subject<Folder> = new Subject();
+  folderCreated$: ReplaySubject<Folder> = new ReplaySubject(3);
   folderErrorOccurred$: Subject<string> = new Subject();
   uploadErrorOccurred$: Subject<string> = new Subject();
+  documentResultCreation$: AsyncSubject<Document | null> = new AsyncSubject();
 
   constructor(
     private fb: FormBuilder,
@@ -65,6 +66,8 @@ export class MenuComponent implements OnInit{
     ).subscribe({
       next: (document: Document | null) => {
         if (document) {
+          this.documentResultCreation$.next(document);
+          this.documentResultCreation$.complete();
           console.log('Document created successfully: ', document);
         } else {
           this.uploadErrorOccurred$.next('Document creation failed.');
