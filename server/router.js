@@ -11,12 +11,18 @@ router.get("/", (req, res) => {
 });
 
 router.get("/folders", folderController.getFolders);
+
 router.post("/folder", folderController.createFolder);
-router.put("/folder/:id", folderController.updateFolder);
 router.delete("/folder/:id", folderController.deleteFolder);
 
+router.put("/folder/:id", folderController.updateFolder);
+router.put("/document/:id", documentController.updateDocument);
+
 router.get("/documents", documentController.getDocuments);
+router.get("/document/:title", documentController.getDocument);
+
 router.post("/document", documentController.createDocument);
 router.delete("/document/:id", documentController.deleteDocument);
+
 
 module.exports = router;

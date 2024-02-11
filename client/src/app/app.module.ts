@@ -9,7 +9,7 @@ import { DialogModule } from 'primeng/dialog';
 import { MenubarModule } from 'primeng/menubar';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FileUploadModule } from 'primeng/fileupload';
 
@@ -29,6 +29,7 @@ import { FileUploadModule } from 'primeng/fileupload';
     ReactiveFormsModule,
     InputTextareaModule,
     FileUploadModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

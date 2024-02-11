@@ -77,3 +77,41 @@ exports.deleteDocument = async (req, res) => {
         return res.json({ error: error.message });
     }
 }
+
+exports.getDocument = async (req, res) => {
+    try {
+        console.log(req.params.title)
+        const document = await Document.findOne({ where: { title: req.params.title } });
+
+        if (!document) {
+            return res.status(404).json({ message: 'Fichier non trouvé' });
+        }
+
+        return res.status(200).json(document);
+    } catch (error) {
+        console.error(error)
+        return res.status(500).json({ error: 'Erreur lors de la recherche du fichier' });
+    }
+}
+
+exports.updateDocument = async (req, res) => {
+
+    try {
+        const documentId = req.params.id;
+        const { title } = req.body;
+
+        const document = await Document.findByPk(documentId);
+        if (!document) {
+            return res.status(404).json({ message: 'Dossier non trouvé' });
+        }
+
+        document.title = title;
+
+        await document.save();
+
+        return res.status(200).json(document);
+    } catch (error) {
+        console.error(error)
+        return res.status(500).json({ error: 'Erreur lors de la mise à jour du fichier' });
+    }
+}

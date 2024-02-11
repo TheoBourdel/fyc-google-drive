@@ -66,3 +66,15 @@ form {
   color: #2c3e50;
   margin-bottom: 10px;
 }
+.search-container{
+    margin-top: 10px;
+}
+
+.form-search {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-search-input {
+    width: 100%;
+}
